@@ -2,18 +2,24 @@
   "name": "api",
   "version": "1.0.0",
   "description": "Server application for creating a Christmas Wish List",
-  "main": "index.js",
+  "main": "app.js",
+  "repository": "https://github.com/trentdaniels/wishlist",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "author": "Trenton Daniels",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+    "nodemon": "^1.18.9"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongoose": "^5.4.0"
   }
