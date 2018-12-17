@@ -9,6 +9,7 @@
     "build": "webpack --mode production",
     "lint": "eslint . --ext .js"
   },
+  "repository": "https: //github.com/trentdaniels/wishlist",
   "author": "Trenton Daniels",
   "license": "ISC",
   "devDependencies": {
