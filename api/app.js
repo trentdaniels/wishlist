@@ -12,8 +12,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(productRoutes);
 
-connect(db.MONGODB_URI, { useNewUrlParser: true })
-  .then(() => {
-    app.listen(3001);
-  })
-  .catch(err => err);
+
+const startServer = async () => {
+  try {
+    await connect(db.MONGODB_URI, { useNewUrlParser: true });
+    return app.listen(3001);
+  } catch (err) {
+    return err;
+  }
+};
+
+startServer();

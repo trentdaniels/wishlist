@@ -13,6 +13,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+    required: true,
+  },
 });
 
-module.exports = model('Product', userSchema);
+module.exports = model('User', userSchema);
