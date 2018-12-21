@@ -7,6 +7,7 @@ const cors = require('cors');
 const path = require('path');
 
 const productRoutes = require('./routes/products');
+const authRoutes = require('./routes/auth');
 const db = require('./config/database');
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use(productRoutes);
+app.use(authRoutes);
 
 app.use((error, req, res) => {
   const { statusCode, message, data } = error;
