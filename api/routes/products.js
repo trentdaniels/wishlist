@@ -11,6 +11,8 @@ router.get('/product/:productId', productsController.getProduct);
 
 router.post('/products', isAuth, productsController.createProduct);
 
-router.put('/product/:productId', isAuth);
+router.put('/product/:productId', isAuth, productsController.updateProduct);
+
+router.delete('/product/:productId', isAuth);
 
 module.exports = router;
