@@ -33,3 +33,30 @@ exports.getProduct = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.createProduct = async (req, res, next) => {
+  const { title, description } = req.body;
+  if (!req.file) {
+    const error = new Error('No Image was Provided!');
+    error.statusCode = 403;
+    throw error;
+  }
+  const imageUrl = req.file.path;
+  const product = new Product({
+    title,
+    imageUrl,
+    description,
+    creator: req.userId,
+  });
+  try {
+    await product.save();
+    res.status(201).json({
+      product,
+    });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};

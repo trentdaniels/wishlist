@@ -7,9 +7,9 @@ const router = express.Router();
 
 router.get('/products', productsController.getProducts);
 
-router.get('/product/:productId');
+router.get('/product/:productId', productsController.getProduct);
 
-router.post('/products', isAuth);
+router.post('/products', isAuth, productsController.createProduct);
 
 router.put('/product/:productId', isAuth);
 

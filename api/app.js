@@ -2,18 +2,20 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { connect } = require('mongoose');
 const cors = require('cors');
-// const multer = require('multer');
+const multer = require('multer');
 
 const path = require('path');
 
 const productRoutes = require('./routes/products');
 const authRoutes = require('./routes/auth');
 const db = require('./config/database');
+const { storage, fileFilter } = require('./middleware/multer');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'images')));
+app.use('/images', multer({ storage, fileFilter }).single('image'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors());
