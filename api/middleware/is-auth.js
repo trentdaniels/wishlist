@@ -5,7 +5,7 @@ const { TOKEN_SECRET } = require('../config/auth');
 module.exports = (req, res, next) => {
   const authHeader = req.get('Authorization');
   if (!authHeader) {
-    const error = new Error('Not Authorized');
+    const error = new Error('Not Authenticated');
     error.statusCode = 401;
     throw error;
   }
@@ -16,6 +16,12 @@ module.exports = (req, res, next) => {
   } catch (err) {
     err.statusCode = 500;
     throw err;
+  }
+
+  if (!decodedToken) {
+    const error = new Error('Not Authenticated');
+    error.statusCode = 401;
+    throw error;
   }
 
   req.userId = decodedToken.userId;

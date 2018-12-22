@@ -8,6 +8,7 @@ const path = require('path');
 
 const productRoutes = require('./routes/products');
 const authRoutes = require('./routes/auth');
+const wishlistRoutes = require('./routes/wishlist');
 const db = require('./config/database');
 const { storage, fileFilter } = require('./middleware/multer');
 
@@ -21,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use(productRoutes);
+app.use(wishlistRoutes);
 app.use(authRoutes);
 
 app.use((error, req, res) => {
