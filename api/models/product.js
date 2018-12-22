@@ -13,6 +13,10 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
+  price: {
+    type: Number,
+    require: true,
+  },
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'User',

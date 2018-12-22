@@ -1,3 +1,5 @@
+const { validationResult } = require('express-validator/check');
+
 const Product = require('../models/product');
 const Wishlist = require('../models/wishlist');
 const { deleteImage } = require('../util/image');
@@ -38,6 +40,13 @@ exports.getProduct = async (req, res, next) => {
 
 exports.createProduct = async (req, res, next) => {
   const { title, description } = req.body;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = new Error('Validation Failed');
+    error.statusCode = 422;
+    error.data = errors.array();
+    throw error;
+  }
   if (!req.file) {
     const error = new Error('No Image was Provided!');
     error.statusCode = 403;
@@ -67,6 +76,13 @@ exports.updateProduct = async (req, res, next) => {
   const { productId } = req.params;
   const { title, description, image } = req.body;
   let imageUrl = image;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = new Error('Validation Failed');
+    error.statusCode = 422;
+    error.data = errors.array();
+    throw error;
+  }
   if (req.file) {
     imageUrl = req.file.path;
   }
