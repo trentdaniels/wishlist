@@ -13,6 +13,6 @@ router.post('/products', isAuth, productsController.createProduct);
 
 router.put('/product/:productId', isAuth, productsController.updateProduct);
 
-router.delete('/product/:productId', isAuth);
+router.delete('/product/:productId', isAuth, productsController.deleteProduct);
 
 module.exports = router;
