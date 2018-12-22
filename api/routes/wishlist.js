@@ -23,4 +23,17 @@ router.post(
   wishlistController.createWishlist,
 );
 
+router.put(
+  '/wishlist/:wishlistId',
+  [
+    body('title')
+      .isString()
+      .trim()
+      .not()
+      .isEmpty(),
+  ],
+  isAuth,
+  wishlistController.updateWishlist,
+);
+
 module.exports = router;

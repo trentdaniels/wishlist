@@ -49,12 +49,36 @@ exports.createWishlist = async (req, res, next) => {
   }
   const wishlist = new Wishlist({
     title,
-    creator: req.userId,
     products: [],
   });
   try {
     const newWishlist = await wishlist.save();
+    const user = await User.findById(req.userId);
+    user.wishlists.push(newWishlist);
+    await user.save();
     res.status(201).json({ wishlist: newWishlist });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+exports.updateWishlist = async (req, res, next) => {
+  const { wishlistId } = req.params;
+  const { products, title } = req.body;
+  try {
+    const wishlist = await Wishlist.findById(wishlistId);
+    if (!wishlist) {
+      const error = new Error('Wishlist not found');
+      error.statusCode = 404;
+      throw error;
+    }
+    wishlist.products = products;
+    wishlist.title = title;
+    await wishlist.save();
+    res.status(204).json();
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
